@@ -41,5 +41,25 @@ describe('Bill with settings Factory Function', function(){
 
         assert.equal(20.00, settingsBill.getWarningLevel());
        
+        let settingsBillTwo = BillWithSettings();
+
+        settingsBillTwo.setWarningLevel(30.00)
+
+        assert.equal(30.00, settingsBillTwo.getWarningLevel());
+       
+    });
+    it('should be able to set critical level', function(){
+        let settingsBill = BillWithSettings();
+
+        settingsBill.setCriticalLevel(35.00)
+
+        assert.equal(35.00, settingsBill.getCriticalLevel());
+       
+        let settingsBillTwo = BillWithSettings();
+
+        settingsBillTwo.setCriticalLevel(45.00)
+
+        assert.equal(45.00, settingsBillTwo.getCriticalLevel());
+       
     })
 })
