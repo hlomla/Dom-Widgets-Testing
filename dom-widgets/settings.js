@@ -22,6 +22,12 @@ function BillWithSettings(){
     function getWarningLevel(){
         return theWarningLevel
     }
+    function setCriticalLevel(criticalLevel){
+        theCriticalLevel = criticalLevel
+    }
+    function getCriticalLevel(){
+        return theCriticalLevel
+    }
 
     return {
     setCallCost,
@@ -29,6 +35,8 @@ function BillWithSettings(){
     setSmsCost,
     getSmsCost,
     setWarningLevel,
-    getWarningLevel
+    getWarningLevel,
+    setCriticalLevel,
+    getCriticalLevel
 }
 }
