@@ -51,8 +51,8 @@ describe('Calculate Bill Factory Function', function () {
             it('should be able to return warning level when it gets R20', function () {
                 let billItems = calculateBill();
                 billItems.billString('call,sms,sms,sms,sms,sms,sms,call,call,call,call,call')
-                
-                billItems.warningLevelReached(20)            
+
+                billItems.warningLevelReached(20)
                 assert.equal(20, billItems.getwarningLevel());
 
 
@@ -60,32 +60,63 @@ describe('Calculate Bill Factory Function', function () {
             it('should be able to return critical level when it gets R30', function () {
                 let billItems = calculateBill();
                 billItems.billString('call,sms,sms,sms,sms,sms,sms,call,call,call,call,call,call,sms,sms,sms,call,call,call,call,call,call,sms,sms,sms')
-                
-                billItems.criticalLevelReached(30)            
+
+                billItems.criticalLevelReached(30)
                 assert.equal(30, billItems.getCriticalLevel());
 
-
             })
+            describe('Return Class name for "warning" and "critical" when level reached', function () {
+                it('should return a class name of "warning" when warning level is reached', function () {
+                    let billItems = calculateBill();
 
-            // it('should return a class name of "warning" once warning level is reached', function () {
-            //     let settingsBill = BillWithSettings();
+                    billItems.warningLevelReached(20.00)
+                    billItems.criticalLevelReached(30.00)
 
-            //     settingsBill.setCallCost(2.50)
-            //     settingsBill.setSmsCost(0.50)
-            //     settingsBill.setWarningLevel(10)
-            //     settingsBill.setCriticalLevel(15)
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
 
-            //     settingsBill.makeCall()
-            //     settingsBill.makeCall()
-            //     settingsBill.makeCall()
-            //     settingsBill.sendSms()
-            //     settingsBill.sendSms()
-            //     settingsBill.sendSms()
-            //     settingsBill.sendSms()
-            //     settingsBill.sendSms()
 
-            //     assert.equal('warning', settingsBill.getWarningLevelClassName())
-            // })
+
+                    assert.equal('warning', billItems.getWarningName())
+                    assert.equal(21.50, billItems.getTotal())
+                });
+                it('should return a class name of "critical" when critical level is reached', function () {
+                    let billItems = calculateBill();
+
+                    billItems.criticalLevelReached(30.00)
+                    billItems.warningLevelReached(20.00)
+
+
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('call')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
+                    billItems.billString('sms')
+
+
+
+                    assert.equal('critical', billItems.critClassName())
+                    assert.equal(31.25, billItems.getTotal())
+                });
+            });
         });
-    });
+    })
 })

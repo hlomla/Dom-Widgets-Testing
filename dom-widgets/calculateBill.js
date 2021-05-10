@@ -31,14 +31,32 @@ function calculateBill() {
     function getCriticalLevel() {
         return criticalLevelSet
     }
-    
+    function critLevel() {
+        getTotal() >= getCriticalLevel()
+    }
+    function critClassName() {
+
+        if (getTotal() >= 30) {
+            return "critical"
+        }
+    }
+
+    function getWarningName() {
+        if (getTotal() >= 20) {
+            return "warning"
+        }
+    }
+
     return {
         billString,
         getTotal,
         warningLevelReached,
         getwarningLevel,
         criticalLevelReached,
-        getCriticalLevel
+        getCriticalLevel,
+        critLevel,
+        critClassName,
+        getWarningName
     }
 }
 
